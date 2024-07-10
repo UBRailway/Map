@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 1920px;
+}
+
+#map {
+    margin-top: 20px;
+    margin-left: 20px;
+    /*width: 1300px;
+    height: 750px;*/
+    width: 1880px;
+    height: 850px;
+    background-color: red;
+}
+
+@font-face {
+    font-family: Monsr-medium;
+    src: url("../fonts/Montserrat-Medium.ttf");
+}
+
+.header {
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    background: #15206F;
+}
+
+.header-container {
+    display: flex;
+    /*justify-content: center;*/
+    font-family: Monsr-medium, sans-serif;
+    height: 70px;
+    justify-content: space-around;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.reports {
+    padding-right: 40px;
+    text-decoration: none;
+    color: #FFFF;
+    font-size: 20px;
+}
+
+.maps {
+    padding-right: 40px;
+    text-decoration: none;
+    color: #FFFF;
+    font-size: 20px;
+}
+
+.communication {
+    padding-right: 40px;
+    text-decoration: none;
+    color: #FFFF;
+    font-size: 20px;
+}
+
+.reference {
+    text-decoration: none;
+    color: #FFFF;
+    font-size: 20px;
+    /*padding-right: 196px;*/
+}
+
+
+.personal-acc {
+    display: flex;
+    align-items: center;
+
+}
+
+.acc {
+    color: #FFFF;
+    font-size: 15px;
+    font-family: Monsr-medium, sans-serif;
+    text-decoration: none;
+    margin-right: 27px;
+}

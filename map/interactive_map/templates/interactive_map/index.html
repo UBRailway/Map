@@ -1,0 +1,78 @@
+<!--{% load static %}-->
+ <!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Карта</title>
+        <link type="text/css" href="{% static 'interactive_map/css/styles.css' %}" rel="stylesheet">
+        <script type="text/javascript" src="{% static 'interactive_map/js/marker.js' %}" ></script>
+        </script>
+    </head>
+    <body>
+
+    <header class="header">
+        <div class="header-container">
+            <div></div>
+            <div class="menu">
+                <div>
+                    <a class="reports" href="#">Отчеты</a>
+                </div>
+                <div>
+                    <a class="maps" href="#">Карты</a>
+                </div>
+                <div>
+                    <a class="communication" href="#">Сообщения</a>
+                </div>
+                <div>
+                    <a class="reference" href="#">Справка</a>
+                </div>
+            </div>
+
+            <div class="personal-acc">
+                <a class="acc" href="#">Знайдюк А.Н.</a>
+                <img src="static/interactive_map/images/enter.svg" alt="">
+            </div>
+        </div>
+    </header>
+
+        <div id="map"></div>
+
+        <script>
+            // Получение данных из файла views.py и создание массива данных artificial_construction
+            var markerConstruction = [];
+            {% for a in artificial_construction %}
+                markerConstruction.push({
+                    title: "{{a.name}}",
+                    lat: {{a.latitude}},
+                    lng: {{a.longitude}},
+                    icon: "static/interactive_map/images/{{a.media.link}}"
+                })
+            {% endfor %}
+
+            // Получение данных из файла views.py и создание массива данных kilometers (киллометры для отрисовки)
+            var arrayKilometers = [];
+            {% for k in kilometers %}
+                arrayKilometers.push({
+                    id: {{k.id}},
+                    distance: {{k.distance}},
+                    start_latitude: {{k.start_latitude}},
+                    start_longitude: {{k.start_longitude}},
+                    name: {{k.name}}
+               })
+            {% endfor %}
+
+            // Получение данных из файла views.py и создание массива данных station (станции пути)
+            var arrayStation = [];
+            {% for s in station %}
+                arrayStation.push({
+                    id: {{s.id}},
+                    title: "{{s.name}}",
+                    lat: {{s.latitude}},
+                    lng: {{s.longitude}}
+               })
+            {% endfor %}
+        </script>
+        //Подключение карты на сайт
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm6p524LHuz0-Tn7pk6UcQLy6vDDjjFCI&callback=initMap"></script>
+    </body>
+</html>
