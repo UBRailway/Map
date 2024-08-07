@@ -17,33 +17,44 @@ class Kilometers(models.Model):
     name = models.IntegerField(verbose_name='Километр')
     distance = models.IntegerField(verbose_name='Протяженность')
     station = models.ForeignKey('Station', on_delete=models.PROTECT, null=True)
-    start_latitude = models.DecimalField(max_digits=15,decimal_places=12, null=True, verbose_name='Широта')
-    start_longitude = models.DecimalField(max_digits=15, decimal_places=12, null=True, verbose_name='Широта')
+    risk = models.IntegerField(verbose_name='Риск размыва', null=True)
+
+# Участки километров железной дороги
+class SectionsKilometers(models.Model):
+    kilometers = models.ForeignKey('Kilometers', on_delete=models.PROTECT, null=True)
+    start_latitude = models.DecimalField(max_digits=15, decimal_places=12, null=True, verbose_name='Широта')
+    start_longitude = models.DecimalField(max_digits=15, decimal_places=12, null=True, verbose_name='Долгота')
 
 # Искуственные сооружения железной дороги
 class Artificial_Construction(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     latitude = models.DecimalField(max_digits=15,decimal_places=12, null=True, verbose_name='Широта')
     longitude = models.DecimalField(max_digits=15,decimal_places=12, null=True, verbose_name='Долгота')
-    media = models.ForeignKey('Media', on_delete=models.PROTECT, null=True)
+    media = models.ForeignKey('Media', on_delete=models.PROTECT, null=True) #Иконка для маркера на карте
 
-    @property
-    def media_link(self):
-        return self.media.link
+    # @property
+    # def media_link(self):
+    #     return self.media.link
+
+# Картинки и видео исскуственных сооружений
+class Media_Artificial_Construction(models.Model):
+    artificial_construction = models.ForeignKey('Artificial_Construction', on_delete=models.PROTECT, null=True)
+    media = models.ForeignKey('Media', on_delete=models.PROTECT, null=True)
 
 # Таблица с картинками и видео
 class Media(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     link = models.FileField(verbose_name='Медиа')
 
-    def __str__(self):
-        return self.link
+    # def __str__(self):
+    #     return self.link
 
 # Таблица станций
 class Station(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     latitude = models.DecimalField(max_digits=15, decimal_places=12, null=True, verbose_name='Широта')
     longitude = models.DecimalField(max_digits=15, decimal_places=12, null=True, verbose_name='Долгота')
+    description = models.CharField(max_length=1000, verbose_name='Описание станции', null=True)
 
 # Риск размыва пути
 class Risk_Destroying_Path(models.Model):

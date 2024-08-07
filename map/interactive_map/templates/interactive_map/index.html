@@ -1,78 +1,302 @@
 <!--{% load static %}-->
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <title>Карта</title>
-        <link type="text/css" href="{% static 'interactive_map/css/styles.css' %}" rel="stylesheet">
-        <script type="text/javascript" src="{% static 'interactive_map/js/marker.js' %}" ></script>
-        </script>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Карта</title>
+    <link type="text/css" href="{% static 'interactive_map/css/styles.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'interactive_map/js/marker.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'interactive_map/css/jquery-ui.min.css' %}">
+    <!--        <link rel="stylesheet" href="../../static/interactive_map/css/jquery-ui.min.css">-->
+</head>
+<body>
 
-    <header class="header">
-        <div class="header-container">
-            <div></div>
-            <div class="menu">
-                <div>
-                    <a class="reports" href="#">Отчеты</a>
-                </div>
-                <div>
-                    <a class="maps" href="#">Карты</a>
-                </div>
-                <div>
-                    <a class="communication" href="#">Сообщения</a>
-                </div>
-                <div>
-                    <a class="reference" href="#">Справка</a>
-                </div>
+<header class="header">
+    <div class="header-container">
+        <div></div>
+        <div class="menu">
+            <div>
+                <a class="reports" href="#">Отчеты</a>
             </div>
-
-            <div class="personal-acc">
-                <a class="acc" href="#">Знайдюк А.Н.</a>
-                <img src="static/interactive_map/images/enter.svg" alt="">
+            <div>
+                <a class="maps" href="#">Карты</a>
+            </div>
+            <div>
+                <a class="communication" href="#">Сообщения</a>
+            </div>
+            <div>
+                <a class="reference" href="#">Справка</a>
             </div>
         </div>
-    </header>
 
-        <div id="map"></div>
+        <div class="personal-acc">
+            <a class="acc" href="#">Знайдюк А.Н.</a>
+            <img src="static/interactive_map/images/enter.svg" alt="">
+        </div>
+    </div>
+</header>
 
-        <script>
-            // Получение данных из файла views.py и создание массива данных artificial_construction
-            var markerConstruction = [];
-            {% for a in artificial_construction %}
-                markerConstruction.push({
-                    title: "{{a.name}}",
-                    lat: {{a.latitude}},
-                    lng: {{a.longitude}},
-                    icon: "static/interactive_map/images/{{a.media.link}}"
-                })
-            {% endfor %}
+<!--    <div id="map"></div>-->
+<div class="accordion-root">
 
-            // Получение данных из файла views.py и создание массива данных kilometers (киллометры для отрисовки)
-            var arrayKilometers = [];
-            {% for k in kilometers %}
-                arrayKilometers.push({
-                    id: {{k.id}},
-                    distance: {{k.distance}},
-                    start_latitude: {{k.start_latitude}},
-                    start_longitude: {{k.start_longitude}},
-                    name: {{k.name}}
-               })
-            {% endfor %}
+    <div id="map"></div>
 
-            // Получение данных из файла views.py и создание массива данных station (станции пути)
-            var arrayStation = [];
-            {% for s in station %}
-                arrayStation.push({
-                    id: {{s.id}},
-                    title: "{{s.name}}",
-                    lat: {{s.latitude}},
-                    lng: {{s.longitude}}
-               })
-            {% endfor %}
-        </script>
-        //Подключение карты на сайт
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm6p524LHuz0-Tn7pk6UcQLy6vDDjjFCI&callback=initMap"></script>
-    </body>
+    <div class="accord">
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Сухбаатар - Дархан</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1001 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Дархан - Салхит</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1002 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 2
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 2.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 2.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Салхит - Зуунхараа</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1003 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 3
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Зуунхараа - УлаанБаатар</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1004 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 4
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">УлаанБаатар - Мааньт</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1006 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 5
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Мааньт - Чойр</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1007 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 6
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Чойр - Айраг</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1008 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 7
+                            </div>
+                        </div>
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.2</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="accordion-item">-->
+                        <!--                            <div class="accordion-header">Заголовок 3.3</div>-->
+                        <!--                            <div>...</div>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Айраг - Сайншанд</div>
+                <div>
+                    <div class="accordion accordion-child">
+                        <div class="accordion-item">
+                            <div class="accordion-header">1009 км.</div>
+                            <div class="accordion-data">
+                                <img src="img/bridge.png" alt="">
+                                Мост 8
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    {% for kilometer in kilometers %}-->
+<!--        <ul>-->
+<!--            <li>{{kilometer.name}}-->
+<!--                <ul class="ul">-->
+<!--                    <li>{{kilometer.station.name}}</li>-->
+<!--                </ul>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    {% endfor %}-->
+
+<script>
+    // Получение данных из файла views.py и создание массива данных artificial_construction
+    var markerConstruction = [];
+    {% for a in artificial_construction %}
+        markerConstruction.push({
+            id_construction: {{a.id}},
+            title: "{{a.name}}",
+            lat: {{a.latitude}},
+            lng: {{a.longitude}},
+            icon: "static/interactive_map/images/{{a.media.link}}"
+        })
+    {% endfor %}
+
+    // Получение данных из файла views.py и создание массива данных kilometers (киллометры для отрисовки)
+    var arrayKilometers = [];
+    {% for k in kilometers %}
+        arrayKilometers.push({
+            id: {{k.id}},
+            distance: {{k.distance}},
+            name: {{k.name}}
+       })
+    {% endfor %}
+
+    // Получение данных из файла views.py и создание массива данных station (станции пути)
+    var arrayStation = [];
+    {% for s in station %}
+        arrayStation.push({
+            id: {{s.id}},
+            title: "{{s.name}}",
+            lat: {{s.latitude}},
+            lng: {{s.longitude}},
+            desc: "{{s.description}}"
+       })
+    {% endfor %}
+
+    // Секции километров
+    var arraySectionsKilometers = [];
+    {% for sk in sections_kilometers %}
+        arraySectionsKilometers.push({
+            id: {{sk.id}},
+            title: {{sk.kilometers.name}},
+            start_latitude: {{sk.start_latitude}},
+            start_longitude: {{sk.start_longitude}},
+            id_kil: {{sk.kilometers_id}},
+            risk: {{sk.kilometers.risk}}
+       })
+    {% endfor %}
+
+    // Фото и видео объектов ИССИ
+    var arrayMediaArtificialConstruction = [];
+    {% for mac in media_artificial_construction %}
+        arrayMediaArtificialConstruction.push({
+            id: {{mac.id}},
+            id_artificial_construction: {{mac.artificial_construction_id}},
+            id_media: {{mac.media_id}},
+            link: "static/interactive_map/images/{{mac.media.link}}"
+       })
+    {% endfor %}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm6p524LHuz0-Tn7pk6UcQLy6vDDjjFCI&callback=initMap"></script>
+<script src="{% static 'interactive_map/jquery/jquery.min.js' %}"></script>
+<!--<script src="../../static/interactive_map/jquery/jquery-3.6.3.min.js"></script>-->
+<script src="{% static 'interactive_map/jquery/jquery-ui.min.js' %}"></script>
+<!--<script src="../../static/interactive_map/jquery/jquery-ui.min.js"></script>-->
+<script src="{% static 'interactive_map/js/script.js' %}"></script>
+<!--<script src="../../static/interactive_map/js/script.js"></script>-->
+</body>
 </html>
